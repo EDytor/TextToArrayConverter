@@ -16,7 +16,7 @@ public class TextToArrayConverter {
                 pathToString = obtainPathToFileForConversionFromResources();
             }
             String textToConvert = readContentOfFile(pathToString);
-            System.out.println(textToConvert);
+            parseTextIntoTwoDimSortedArray(textToConvert);
         }
         private static Path obtainPathToFileForConversionFromArgs(final String arg) {
             return Paths.get(arg);
@@ -40,28 +40,6 @@ public class TextToArrayConverter {
             }
         }
 
-        public static void bubbleString(String[] family) {
-            int result;
-            String temp;
-            for (int repeat = 0; repeat < family.length - 1; repeat++) {
-                for (int member = 0; member < family.length - 1; member++) {
-                    result = family[member].compareTo(family[member + 1]);
-                    if (result > 0) {
-                        temp = family[member];
-                        family[member] = family[member + 1];
-                        family[member + 1] = temp;
-                    }
-                }
-            }
-            for (String s : family) {
-                System.out.println(s + " ");
-            }
-        }
-
-        public static void StringTable() {
-            parseTextIntoTwoDimSortedArray(textToParse);
-        }
-
         public static void sort(String[] family) {
             int result;
             String temp;
@@ -79,6 +57,7 @@ public class TextToArrayConverter {
 
         public static void parseTextIntoTwoDimSortedArray(final String textToParse) {
             final String[] table1D = textToParse.toLowerCase()
+                    .replace("\n"," ")
                     .replaceAll("[^a-zA-Z śźżęąćłńó]", "")
                     .trim()
                     .split(" ");
@@ -146,7 +125,6 @@ public class TextToArrayConverter {
             for (int j = 0; j < words.length; j++) {
                 actualLetter = words[j].charAt(0);
                 table2D[row][indexOfRow] = words[j];
-                System.out.println("DEBUG: " + words[j]);
                 indexOfRow++;
                 if (j + 1 < words.length && actualLetter != words[j + 1].charAt(0)) {
                     row++;
